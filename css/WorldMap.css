@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: skyblue;
+    font-family: Tahoma;
+}
+
+svg path {
+    cursor: pointer;
+}
+
+#flag {
+    width: 150px;
+    height: 75px;
+}
+/* hide image if empty */
+img[src=""] {
+    display: none;
+}
+
+#info {
+    position: absolute;
+    max-width: 300px;
+}
