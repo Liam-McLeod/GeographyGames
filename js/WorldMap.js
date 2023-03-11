@@ -26,6 +26,7 @@ async function getData(place) {
     currencyName = currencies[currencyAbb].name;
     currencySymbol = currencies[currencyAbb].symbol
 
+    // Setting data on page
     document.getElementById("flag").setAttribute("src",countryFlag);
     document.getElementById("country").innerText = countryName;
     document.getElementById("capital").innerText = `Capital: ${capitalCity}`;
@@ -34,35 +35,44 @@ async function getData(place) {
     document.getElementById("currency").innerText = `Currency: ${currencyName} (${currencySymbol} ${currencyAbb})`;
 }
 
-// Loop through all path elements, add 3 events to each path
-document.querySelectorAll("path").forEach(elem=>{
 
-    elem.addEventListener("mouseover",function(){
-        // Get all elements with same name as current element
-        list = document.getElementsByName(elem.getAttribute("name"))
-        for(let i = 0;i<list.length;i++) {
-            list[i].style.fill = 'darkgrey';
-        }
+var svgObject = document.getElementById('mySVG');
+// Embedding SVG Image
+svgObject.onload = function() {
+
+    // Use to get SVG content
+    var svgDoc = svgObject.contentDocument;
+
+    // Loop through all path elements, add 3 events to each path
+    svgDoc.querySelectorAll("path").forEach(elem=>{
+
+        elem.addEventListener("mouseover",function(){
+            // Get all elements with same name as current element
+            list = svgDoc.getElementsByName(elem.getAttribute("name"))
+            for(let i = 0;i<list.length;i++) {
+                list[i].style.fill = 'darkgrey';
+            }
+        })
+
+        elem.addEventListener("mouseleave",function() {
+            // Get all elements with same name as current element
+            list = svgDoc.getElementsByName(elem.getAttribute("name"))
+            for(let i = 0;i<list.length;i++) {
+                list[i].style.fill = '#ececec';
+            }
+        })
+
+        elem.addEventListener("click",function(event){
+            
+            // Move info box near mouse click
+            x=event.pageX;
+            y=event.pageY;
+            document.getElementById("info").style.top = y-20+'px';
+            document.getElementById("info").style.left = x-350+'px';
+
+            // API Call
+            getData(elem.getAttribute("name"));
+        })
+
     })
-
-    elem.addEventListener("mouseleave",function() {
-        // Get all elements with same name as current element
-        list = document.getElementsByName(elem.getAttribute("name"))
-        for(let i = 0;i<list.length;i++) {
-            list[i].style.fill = '#ececec';
-        }
-    })
-
-    elem.addEventListener("click",function(event){
-        
-        // Move info box near mouse click
-        x=event.pageX;
-        y=event.pageY;
-        document.getElementById("info").style.top = y-20+'px';
-        document.getElementById("info").style.left = x-350+'px';
-
-        // API Call
-        getData(elem.getAttribute("name"));
-    })
-
-})
+}
