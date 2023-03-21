@@ -1,6 +1,17 @@
+function flash_message(text,color) {
+    var container = document.getElementById('message-container');
+     // Create Message and Fade it Out
+    var message = document.createElement('p');
+    message.innerText = text;
+    message.classList.add("flash-message");
+    message.style.backgroundColor = color;
+    container.appendChild(message);
+    // Remove message after Fade Out
+    setTimeout(() => {
+        message.remove();
+    }, 3000);
 
-// EVENT LISTENERS
-// ADD TO EACH PATH(COUNTRY) ELEMENT
+}
 
 function highlightCountry(elem, color) {
     // Get all elements with same name as current element (some countries have more than 1 element)
@@ -10,6 +21,7 @@ function highlightCountry(elem, color) {
     }
 }
 
+// ADD EVENT LISTENERS
 var countries = document.querySelectorAll("path");
 var countryList = Array.from(countries);
 
@@ -50,8 +62,7 @@ window.onmouseup = function(e) {
             highlightCountry(countryGuess, 'green');
             playerScore+=1;
             // Correct Answer Message
-            answerMessage.innerText = "Correct!";
-            answerMessage.style.color = 'green'
+            flash_message("Correct!","green")
             
 
         // INCORRECT GUESS
@@ -60,11 +71,8 @@ window.onmouseup = function(e) {
             highlightCountry(countryGuess, 'red');
             highlightCountry(targetCountry, 'green')
 
-
             // Incorrect Answer Message
-            answerMessage.innerText = `Wrong!, You Guessed ${countryGuess.getAttribute('name')}`;
-            answerMessage.style.color = 'red';
-            
+            flash_message(`Wrong!, You Guessed ${countryGuess.getAttribute('name')}`,"red");
         }
         
         // Remove Target Country so no repeats occur (some countries have more than 1 element)

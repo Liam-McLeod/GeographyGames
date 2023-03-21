@@ -1,15 +1,10 @@
-
-
-
 async function getData(place) {
     
-    const url = `https://restcountries.com/v3.1/name/${place}`;
+    const url = `https://restcountries.com/v3.1/name/${place}?fullText=true`;
     const res = await fetch(url);
     json = await res.json();    
     data = json[0];
-
-    console.log(data);
-
+    console.log(data)
     //Flag
     countryFlag = data.flags['svg'];
     // Common Name
@@ -63,13 +58,6 @@ svgObject.onload = function() {
         })
 
         elem.addEventListener("click",function(event){
-            
-            // Move info box near mouse click
-            x=event.pageX;
-            y=event.pageY;
-            document.getElementById("info").style.top = y-20+'px';
-            document.getElementById("info").style.left = x-350+'px';
-
             // API Call
             getData(elem.getAttribute("name"));
         })
