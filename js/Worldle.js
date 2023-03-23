@@ -1,5 +1,9 @@
+function truncate(str, n) {
+    return (str.length > n) ? str.slice(0, n-1) + '...' : str;
+}
 
 function getDistance(values) {
+    // Lat and Long of two countries Radians
     var guesslat = values[0][0].latlng[0] * Math.PI/180;
     var guesslon = values[0][0].latlng[1] * Math.PI/180;
 
@@ -21,6 +25,80 @@ function getDistance(values) {
 
     var distance = Math.ceil(c*r);
     return distance;
+}
+
+function getDirection(values) {
+    // Lat and Long of two countries
+    var guesslat = values[0][0].latlng[0] * Math.PI/180;
+    var guesslon = values[0][0].latlng[1] * Math.PI/180;
+    var targetlat = values[1][0].latlng[0] * Math.PI/180;
+    var targetlon = values[1][0].latlng[1] * Math.PI/180;
+
+    console.log("Guess:" + values[0][0].latlng)
+    console.log("Target:" + values[1][0].latlng)
+    
+    var dlon = targetlon - guesslon;
+    // DIRECTION ICONS
+    var N = "<i class='fa-solid fa-circle-up'></i>";
+    var E = "<i class='fa-solid fa-circle-right'></i>";
+    var S = "<i class='fa-solid fa-circle-down'></i>";
+    var W = "<i class='fa-solid fa-circle-left'></i>";
+
+    var NE = '<i class="fa-solid fa-square-up-right"></i>';
+    var SE = '<i class="fa-solid fa-square-up-right fa-rotate-90"></i>';
+    var SW = '<i class="fa-solid fa-square-up-right fa-rotate-180"></i>';
+    var NW = '<i class="fa-solid fa-square-up-right fa-rotate-270"></i>';
+
+    var bearing,direction;
+
+    // Formula to get for Rhumb Line. (Not the same as bearing)
+
+    const y = Math.log(Math.tan(Math.PI/4+targetlat/2)/Math.tan(Math.PI/4+guesslat/2));
+
+    // if dLon over 180° take shorter rhumb line across the anti-meridian:
+    if (Math.abs(dlon) > Math.PI) dlon = dlon>0 ? -(2*Math.PI-dlon) : (2*Math.PI+dlon);
+
+    bearing = Math.atan2(dlon, y) * 180/Math.PI;
+    // Fix negative angle
+    if(bearing < 0) {
+        bearing = 360 + bearing;
+    }
+    console.log(bearing);
+    // Use Bearing to determine cardinal direction
+    // North
+    if(bearing <= 10 || bearing >= 350 ) {
+        direction = N;
+    }
+    // North East
+    if(bearing > 10 && bearing < 80) {
+        direction = NE;
+    }
+    // East
+    if(bearing >= 80 && bearing <= 100){
+        direction = E;
+    }
+    // South East
+    if(bearing > 100 && bearing < 180) {
+        direction = SE;
+    }
+    // South
+    if(bearing >=170 && bearing <= 190 ) {
+        direction = S;
+    }
+    //South West
+    if(bearing > 190 && bearing < 270) {
+        direction = SW;
+    }
+    // West
+    if(bearing >=260 && bearing <=280) {
+        direction = W;
+    }
+    // North West
+    if(bearing > 280 && bearing < 350) {
+        direction = NW;
+    }
+
+    return direction;
 }
 
 function validCountry(countryGuess,countryList) {
@@ -139,11 +217,15 @@ function addGuess(countryList,randomCountryName) {
                     fetch(`https://restcountries.com/v3.1/name/${countryGuess}?fullText=true`).then(resp => resp.json()),
                     fetch(`https://restcountries.com/v3.1/name/${randomCountryName}?fullText=true`).then(resp => resp.json())
                 ]);
+
                 // Process Data
                 distanceData.then(values => {
-                    var distance = getDistance(values)
-                    // Add Country Guess, Distance, Direction, X Icon
-                    item.innerHTML = countryGuess.toUpperCase() + distance+"KM" + "<i class='fa-solid fa-rectangle-xmark'></i>";
+                    var distance = getDistance(values);
+                    var direction = getDirection(values);
+                    // Truncate if country name is too long
+                    countryGuess = truncate(countryGuess,25)
+                    // Add Country Guess, Distance, Direction Icon, X Icon
+                    item.innerHTML = ` ${countryGuess.toUpperCase()} ${distance}km ${direction} <i class='fa-solid fa-rectangle-xmark'></i>`;
                 });
                 
                 guessesRemaining--;
