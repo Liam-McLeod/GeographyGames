@@ -88,7 +88,7 @@ async function getData(place) {
     const res = await fetch(url);
     json = await res.json();    
     data = json[0];
-    console.log(data)
+    
     //Flag
     countryFlag = data.flags['svg'];
     // Common Name

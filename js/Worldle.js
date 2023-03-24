@@ -33,9 +33,6 @@ function getDirection(values) {
     var guesslon = values[0][0].latlng[1] * Math.PI/180;
     var targetlat = values[1][0].latlng[0] * Math.PI/180;
     var targetlon = values[1][0].latlng[1] * Math.PI/180;
-
-    console.log("Guess:" + values[0][0].latlng)
-    console.log("Target:" + values[1][0].latlng)
     
     var dlon = targetlon - guesslon;
     // DIRECTION ICONS
@@ -264,8 +261,6 @@ async function getCountry() {
     var randomCountryImage = `../img/WorldleCountryImgs/all/${randomCountryCode.toLowerCase()}/256.png`;
     // All Country Names
     var countryList = Object.values(json);
-
-    console.log(randomCountryName);
 
     // Display Country Image
     document.getElementById('random-country').setAttribute('src',randomCountryImage)
