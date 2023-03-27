@@ -49,7 +49,6 @@ function getDirection(values) {
     var bearing,direction;
 
     // Formula to get for Rhumb Line. (Not the same as bearing)
-
     const y = Math.log(Math.tan(Math.PI/4+targetlat/2)/Math.tan(Math.PI/4+guesslat/2));
 
     // if dLon over 180° take shorter rhumb line across the anti-meridian:
@@ -60,7 +59,6 @@ function getDirection(values) {
     if(bearing < 0) {
         bearing = 360 + bearing;
     }
-    console.log(bearing);
     // Use Bearing to determine cardinal direction
     // North
     if(bearing <= 10 || bearing >= 350 ) {
