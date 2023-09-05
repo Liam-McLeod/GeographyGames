@@ -1,11 +1,20 @@
-Geography Games
+# Introduction
+
+This project consists of 2 geography games and an interactive world map that users can explore to practice their geography skills.
 
 1. Find the Country
 2. Worldle Game
 3. World Map
 
-Built with REST Countries API
+Worldle was inspired by the game of the same name by Teuteuf Games.
+url: https://worldle.teuteuf.fr/
 
-Press +/- to zoom in/out and arrow keys to move left/right For 1. and 3.
-Some territories in 2. do not appear in 1. or 3.
-Bahamas, Cayman Islands and Trinidad and Tobago have incorrect lat long info for 2.
+Credit to https://github.com/djaiss/mapsicon for the individual country SVG's.
+
+Built with REST Countries API and JavaScript. Deployed on Netlify.
+
+Press +/- to zoom in/out and arrow keys to move left/right For Find the Country (1) and the World Map (3).
+Some territories in Worldle (2). do not appear in Find the Country (1) or the World Map (3).
+
+# Live Version
+https://astonishing-tapioca-6d2355.netlify.app
