@@ -23,7 +23,8 @@ img[src=""] {
 
 #info {
     position: fixed;
-    left: 5%;
+    left: 1%;
     top: 40%;
     max-width: 300px;
+    pointer-events: none;
 }

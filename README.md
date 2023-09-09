@@ -13,8 +13,8 @@ Credit to https://github.com/djaiss/mapsicon for the individual country SVG's.
 
 Built with REST Countries API and JavaScript. Deployed on Netlify.
 
-Press +/- to zoom in/out and arrow keys to move left/right For Find the Country (1) and the World Map (3).
-Some territories in Worldle (2). do not appear in Find the Country (1) or the World Map (3).
+Press +/- to zoom in/out and arrow keys to move left/right when zooming for Find the Country (1) and the World Map (3).
+Some territories in Worldle (2), do not appear in Find the Country (1) or the World Map (3).
 
 # Live Version
 https://astonishing-tapioca-6d2355.netlify.app

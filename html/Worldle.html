@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Worldle Game</title>
+    <title>Worldle</title>
     <link rel="stylesheet" href="../css/Worldle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 </head>
@@ -12,26 +12,28 @@
 
     <div id="message-container"></div>
 
-    <h1 id="title">WORLDLE</h1>
-
-    <div id="img-container">
-        <img id = "random-country" src="" alt="">
-    </div>
-
-    <div id="input-container">        
-        <div class="text-display"></div>
-        <div class="text-display"></div>
-        <div class="text-display"></div>
-        <div class="text-display"></div>
-        <div class="text-display"></div>
-        <div class="text-display"></div>
+    <div class="main-container">
         
-        <div class="autocomplete">
-            <input id='user-guess' type="text" placeholder="Country, territory...">
-        </div>
-        <button id="guess-btn">Guess</button>
-    </div>
+        <h1 id="title">WORLDLE</h1>
 
+        <img id = "random-country">
+        
+
+        <div id="input-container">
+            
+            <div class="text-display"></div>
+            <div class="text-display"></div>
+            <div class="text-display"></div>
+            <div class="text-display"></div>
+            <div class="text-display"></div>
+            <div class="text-display"></div>
+            
+            <div class="autocomplete">
+                <input id='user-guess' type="text" placeholder="Country, territory...">
+            </div>
+            <button id="guess-btn">Guess</button>
+        </div>
+    </div>
     <script src="../js/Worldle.js"></script>  
 </body>
 </html>
