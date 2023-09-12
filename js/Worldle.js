@@ -160,7 +160,6 @@ function autocomplete(inp, countryList) {
 }
 
 function addGuess(countryList,randomCountryName) {
-
     var userInput = document.getElementById('user-guess')
     var countryGuess = userInput.value;
     var input_container = document.getElementById('input-container');
@@ -255,6 +254,7 @@ async function getCountry() {
     var randomCountryCode = Object.keys(json)[Math.floor(Math.random() * Object.keys(json).length)];
     // Values are Country Names
     var randomCountryName = json[randomCountryCode];
+    console.log(randomCountryName)
     // Image Names are Country Codes
     var randomCountryImage = `../img/WorldleCountryImgs/all/${randomCountryCode.toLowerCase()}/256.png`;
     // All Country Names
